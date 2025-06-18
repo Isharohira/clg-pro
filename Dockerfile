@@ -1,14 +1,14 @@
-FROM centos:7
+FROM rockylinux:8
 
-# Install Apache (httpd)
-RUN yum install httpd -y
+# Install Apache
+RUN dnf install httpd -y
 
-# Create Hello World HTML file
+# Create Hello World page
 RUN echo "Hello World" > /var/www/html/index.html
 
-# Start Apache when container runs
+# Start Apache
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 
-# Expose port 80
 EXPOSE 80
+
 
