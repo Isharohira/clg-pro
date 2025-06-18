@@ -1,8 +1,13 @@
-FROM centos:latest
-RUN yum install httpd zip wget unzip -y
-RUN wget -O /var/www/html/healet.zip https://www.free-css.com/assets/files/free-css-templates/download/page296/healet.zip
-WORKDIR /var/www/html
-RUN unzip healet.zip
-RUN cp -rf healet-html/*.* . && \
-    rm -rf healet-html
+FROM centos:7
+
+# Install Apache (httpd)
+RUN yum install httpd -y
+
+# Create Hello World HTML file
+RUN echo "Hello World" > /var/www/html/index.html
+
+# Start Apache when container runs
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
+# Expose port 80
 EXPOSE 80
