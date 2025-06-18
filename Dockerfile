@@ -11,3 +11,4 @@ CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 
 # Expose port 80
 EXPOSE 80
+
