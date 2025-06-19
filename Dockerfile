@@ -11,7 +11,7 @@ WORKDIR /var/www/html
 RUN wget https://templatemo.com/download/templatemo_591_villa_agency && mv templatemo_591_villa_agency templatemo_591_villa_agency.zip
 #WORKDIR /var/www/html
 RUN unzip templatemo_591_villa_agency.zip
-RUN cp -rf templatemo_591_villa_agency/* . &&\
+RUN cp -rf templatemo_591_villa_agency/* .
 # Expose HTTP port
 EXPOSE 80
 
