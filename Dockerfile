@@ -4,17 +4,14 @@ FROM centos:7
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
     sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 
-# Install Apache, wget, unzip
-RUN yum install -y httpd wget unzip
+# Install necessary packages
+RUN yum install -y httpd wget unzip -y
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Download Oberlo theme ZIP and unzip
-RUN wget https://github.com/themewagon/Oberlo/archive/refs/heads/gh-pages.zip -O oberlo.zip && \
-    unzip oberlo.zip && \
-    cp -r Oberlo-gh-pages/* . && \
-    rm -rf oberlo.zip Oberlo-gh-pages
+# Download Oberlo template from GitHub Pages
+RUN wget https://themewagon.github.io/Oberlo/ -O index.html
 
 # Expose HTTP port
 EXPOSE 80
