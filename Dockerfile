@@ -23,3 +23,4 @@ CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 # wget https://templatemo.com/download/templatemo_589_lugx_gaming && mv templatemo_589_lugx_gaming templatemo_589_lugx_gaming.zip
 # unzip templatemo_589_lugx_gaming.zip
 # cp -rf templatemo_589_lugx_gaming/* .
+
