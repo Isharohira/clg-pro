@@ -1,12 +1,20 @@
-FROM rockylinux:8
+FROM centos:7
 
-# Install Apache
-RUN dnf install httpd -y
+# Fix deprecated CentOS repo URLs
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 
-# Create Hello World page
-RUN echo "Hello world" > /var/www/html/index.html
+# Install necessary packages
+RUN yum install -y httpd wget unzip -y
 
-# Start Apache
-CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+# Set working directory
+WORKDIR /var/www/html
 
+# Download Oberlo template from GitHub Pages
+RUN wget https://themewagon.github.io/Oberlo/ -O index.html
+
+# Expose HTTP port
 EXPOSE 80
+
+# Start Apache server
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
