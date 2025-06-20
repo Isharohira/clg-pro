@@ -1,17 +1,16 @@
-FROM centos:7
+FROM rockylinux:8
 
 # Fix deprecated CentOS repo URLs
-RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
-    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+#RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
+    #sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 
 # Install necessary packages
 
-RUN yum install -y httpd wget unzip -y
+RUN yum install -y httpd wget unzip && yum clean all
 WORKDIR /var/www/html
 RUN wget https://templatemo.com/download/templatemo_591_villa_agency && mv templatemo_591_villa_agency templatemo_591_villa_agency.zip
 #WORKDIR /var/www/html
-RUN unzip templatemo_591_villa_agency.zip
-RUN  cp -rf templatemo_591_villa_agency/* .
+RUN unzip templatemo_591_villa_agency.zip && cp -rf templatemo_591_villa_agency/* .
 # Expose HTTP port
 EXPOSE 80
 
@@ -30,4 +29,3 @@ CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 #wget https://templatemo.com/download/templatemo_591_villa_agency && mv templatemo_591_villa_agency templatemo_591_villa_agency.zip
 #unzip templatemo_591_villa_agency.zip
 #cp -rf templatemo_591_villa_agency/* .
-
