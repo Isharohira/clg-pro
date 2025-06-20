@@ -8,10 +8,10 @@ RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
 
 RUN yum install -y httpd wget unzip -y
 WORKDIR /var/www/html
-RUN wget https://templatemo.com/download/templatemo_589_lugx_gaming && mv templatemo_589_lugx_gaming templatemo_589_lugx_gaming.zip
+RUN wget https://templatemo.com/download/templatemo_591_villa_agency && mv templatemo_591_villa_agency templatemo_591_villa_agency.zip
 #WORKDIR /var/www/html
-RUN unzip templatemo_589_lugx_gaming.zip
-RUN  cp -rf templatemo_589_lugx_gaming/* .
+RUN unzip templatemo_591_villa_agency.zip
+RUN  cp -rf templatemo_591_villa_agency/* .
 # Expose HTTP port
 EXPOSE 80
 
